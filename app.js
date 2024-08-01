@@ -1,10 +1,20 @@
 const express = require('express');
+const ejs = require('ejs');
+
 const app = express();
 
 const PORT = 3000;
 
+//setting our view engine
+app.set('view engine', 'ejs');
+app.set('views', './views')
+
 app.get('/', (req, res) => {
-    res.send('Hello, world!')
+    const data = {
+        title: 'Hello, World!',
+        message: 'Welcome to my website!'
+    }
+    res.render('index', {data});
 });
 
 //route controller with a path parameters
