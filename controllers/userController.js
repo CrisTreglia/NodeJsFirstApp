@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
-const filePath = require('../database.json');
+const path = require('path');
+const filePath = path.join(__dirname, '../database.json');
 
 //util functions
 async function readData(){
@@ -13,7 +14,7 @@ async function readData(){
 
 async function writeData(data){
     try {
-        const data = await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+        await fs.writeFile(filePath, JSON.stringify(data, null, 2));
     } catch (error) {
         throw new Error('Internal Server Error: ', error);        
     }
@@ -23,7 +24,7 @@ async function writeData(data){
 async function createUser(req, res){
     try {
         const data = await readData();
-        const lastUser = data.users[data.users.lenght - 1];
+        const lastUser = data.users[data.users.length - 1];
         const nextId = lastUser ? lastUser.id + 1 : 1;
 
         const newUser = {
@@ -39,7 +40,7 @@ async function createUser(req, res){
         res.send("User added sucessfully!");
 
     } catch (error) {
-        // return res.send("Internal Server Error: ", error);
+        res.status(500).send(`Internal Server Error: ${error.message}`);
     }
 }
 
