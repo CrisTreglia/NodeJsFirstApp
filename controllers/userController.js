@@ -1,24 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const filePath = path.join(__dirname, '../database.json');
-
-//util functions
-async function readData(){
-    try {
-        const data = await fs.readFile(filePath, 'utf-8');
-        return JSON.parse(data);
-    } catch (error) {
-        throw new Error('Internal Server Error: ', error);        
-    }
-}
-
-async function writeData(data){
-    try {
-        await fs.writeFile(filePath, JSON.stringify(data, null, 2));
-    } catch (error) {
-        throw new Error('Internal Server Error: ', error);        
-    }
-}
+const { readData, writeData } = require('../utils/file');
 
 //route handler controller function
 async function createUser(req, res){
@@ -44,6 +27,28 @@ async function createUser(req, res){
     }
 }
 
+async function updateUser(req, res) {
+    try {
+        const data = readData();
+        const user = data.users.find(user => user.id === parseInt(req.params.id));
+
+        if(user){
+            user.username = req.body.username || user.username;
+            user.first_name = req.body.first_name || user.first_name;
+            user.email = req.body.email || user.email;
+
+            await writeData(data);
+        } else {
+            res.status(404).send("User not found");
+        }
+
+    } catch (error) {
+        res.status(500).send(`Internal Server Error: ${error.message}`);
+    }
+}
+
+
 module.exports = {
-    createUser
+    createUser,
+    updateUser
 }

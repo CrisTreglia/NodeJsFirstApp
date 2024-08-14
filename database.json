@@ -17,12 +17,6 @@
       "username": "fooBar",
       "first_name": "FooBar",
       "email": "foobar@rdpolytech.ca"
-    },
-    {
-      "id": 4,
-      "username": "fooBar1",
-      "first_name": "FooBar1",
-      "email": "foobar1@rdpolytech.ca"
     }
   ]
 }
