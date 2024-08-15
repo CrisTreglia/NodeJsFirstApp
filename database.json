@@ -1,22 +1,16 @@
 {
   "users": [
     {
-      "id": 1,
-      "username": "CrisTreglia",
-      "first_name": "Cristofer",
-      "email": "cristofertreglia@outlook.com"
-    },
-    {
-      "id": 2,
-      "username": "User2",
-      "first_name": "User",
-      "email": "user2@outlook.com"
-    },
-    {
       "id": 3,
-      "username": "fooBar",
-      "first_name": "FooBar",
-      "email": "foobar@rdpolytech.ca"
+      "username": "test",
+      "first_name": "test",
+      "email": "test@outlook.com"
+    },
+    {
+      "id": 4,
+      "username": "TestUser1",
+      "first_name": "Test User 1",
+      "email": "testuser1@outlook.com"
     }
   ]
 }
